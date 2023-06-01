@@ -15,12 +15,14 @@ async function getQuantity(){
     dbQuantity === null ? quantity.value = 0 : quantity.value = dbQuantity
 }
 
-function increaseQuantity(product){
-    $redis.incr(product.id)
+async function increaseQuantity(product){
+    const qty = await $redis.incr(product.id)
+    quantity.value = qty
 }
 
-function decreaseQuantity(product){
-    $redis.decr(product.id)
+async function decreaseQuantity(product){
+    const qty = await $redis.decr(product.id)
+    quantity.value = qty
 }
 
 onMounted(() => getQuantity())
@@ -30,7 +32,7 @@ onMounted(() => getQuantity())
     <p>{{ product.id }}</p>
     <p> - </p>
     <p>{{ product.title }}</p>
-    <input type="number" :value="quantity" disabled/>
+    <input type="text" :value="quantity" disabled/>
     <button @click="increaseQuantity(product)"><IconCSS name="uil:plus"/></button>
     <button @click="decreaseQuantity(product)"><IconCSS name="uil:minus"/></button>
 </template>

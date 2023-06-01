@@ -3,7 +3,6 @@ import InventoryList from '~/components/inventoryList.vue';
 
 const currentEmail = useCookie("email");
 const email = currentEmail.value;
-const products = ref([]);
 definePageMeta({
     middleware: 'protector'
 })

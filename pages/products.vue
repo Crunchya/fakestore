@@ -26,7 +26,7 @@ async function getAllCategories() {
 }
 
 const calcTotal = computed(() => {
-    return chosenProducts.value.reduce((before, current) => before + current.price, 0)
+    return chosenProducts.value.reduce((acc, product) => acc + product.price, 0)
 })
 const filteredProducts = computed(() => {
             if (!searchQuery) {
